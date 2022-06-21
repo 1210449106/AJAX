@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax get请求</title>
+    <style>
+        h1{
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+<!--用户单击按钮发送ajax请求-->
+<button id="helloBtn" >Hello AJAX</button>
+<!--div图层 接收服务器响应回来的数据后 在div中进行渲染-->
+<div id="mydiv"></div>
+</body>
+<script type="text/javascript">
+    window.onload = function () {
+        document.getElementById("helloBtn").onclick = function () {
+        //    1 创建ajax核心对象XMLHttpRequest
+            let xhr = new XMLHttpRequest();
+        //    2 注册回调函数
+        //      这是一个回调函数,这个函数在XMLHttpRequest对象的readyState状态值发生改变的时候被调用
+            xhr.onreadystatechange = function () {
+            //    这里的回调函数会被调用多次 0->1 1->2 2->3 3->4 分别被调用
+            //    当XMLHttpRequest对象的readyState的状态是4的时候,表示响应结束了
+                if (this.readyState == 4) {
+                    //响应结束之后,一般会有一个http状态码(200 404 500)
+                    if(this.status == 404){
+                        alert("你访问的资源不存在,请检查请求路径")
+                    }else if ( this.status == 500){
+                        alert("内部错误")
+                    }else if ( this.status == 200){
+                        //200表示响应成功
+                        document.getElementById("mydiv").innerHTML = this.responseText;
+                    }
+                }
+            }
+
+        //    3 开启通道(open只是打开通道 只是浏览器和服务器建立连接 并不会发送请求)
+            xhr.open("GET","/ajax/ajax1request1",true);
+        //    4 发送请求
+            xhr.send();
+        }
+    }
+</script>
+</html>

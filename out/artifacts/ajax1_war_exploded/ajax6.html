@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    table{
+        width: 50%;
+        border:1px black solid;
+        position:fixed;
+        border-collapse:collapse;
+    }
+    td{
+        border:1px black solid;
+        text-align: center;
+    }
+    th{
+        border:1px black solid;
+        text-align: center;
+    }
+</style>
+<body>
+<button id="btn">获取学生信息</button>
+<table>
+    <tr>
+    <th>编号</th>
+    <th>姓名</th>
+    </tr>
+    <tbody id="tbody">
+    </tbody>
+</table>
+<script type="text/javascript">
+    window.onload = function () {
+        document.getElementById("btn").onclick = function () {
+            xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        let stus = xhr.responseText;
+                        stus = JSON.parse(stus);
+                        let html = "";
+                        for (let i = 0; i < stus.length; i++) {
+                            let stu = stus[i];
+                            html += "<tr>";
+                            for (let stuKey in stu) {
+                                html += "<td>" + stu[stuKey] +"</td>";
+                            }
+                            html += "<tr>";
+                            document.getElementById("tbody").innerHTML = html;
+                        }
+                    }
+                }
+            }
+            xhr.open("GET","/ajax/ajax6request6",true);
+            xhr.send();
+        }
+    }
+</script>
+</body>
+</html>

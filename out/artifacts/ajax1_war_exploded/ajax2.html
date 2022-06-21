@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax发送get请求</title>
+</head>
+<body>
+<table>
+    <tr>
+        <td>
+            用户名：
+        </td>
+        <td>
+            <input type="text" id="username">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            密码：
+        </td>
+        <td>
+            <input type="password" id="password">
+        </td>
+    </tr>
+</table>
+<button id="btn">登录</button>
+<p id="myp"></p>
+</body>
+<script type="text/javascript">
+    let xhr = new XMLHttpRequest();
+    window.onload = function () {
+        document.getElementById("btn").onclick = function () {
+            //创建一个时间戳并添加
+            xhr.onreadystatechange = callback;
+            xhr.open("GET", "/ajax/ajaxrequest2?t=" + Math.random() +"&username="+document.getElementById("username").value+"&password="+document.getElementById("password").value, true);
+            xhr.send();
+        }
+    }
+    function callback(){
+        if (xhr.readyState == 4) {
+            if (xhr.status == 200) {
+                document.getElementById("myp").innerHTML = xhr.responseText
+            } else {
+                alert(xhr.status)
+            }
+        }
+    }
+</script>
+</html>

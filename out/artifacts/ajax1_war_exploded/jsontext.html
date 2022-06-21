@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>json test</title>
+</head>
+<body>
+<script type="text/javascript">
+/*
+js中创建json格式数据 key为String value不限
+let user = {
+        "key1":value1,
+        "key2":value2,
+        "key3":value3
+    }*/
+let adress = {
+    "city":"北京",
+    "street":"大兴",
+    "zipcode":"123456"
+}
+let user = {
+    "id":1,
+    "name":"张三",
+    "aihaos":["chouyan","hejiu","tangtou"],
+    "adress":adress,
+    "adress2":{"city":"北京","street":"大兴","zipcode":"123456"
+    },
+}
+let aihaos = user.aihaos;
+for (let i = 0; i < aihaos.length ; i++) {
+    console.log(aihaos[i]);
+}
+
+console.log(user.id);
+console.log(user["adress"]["city"]);
+console.log(user.adress2.street);
+</script>
+</body>
+</html>
